@@ -1,0 +1,47 @@
+section {
+  outline: 1px solid green;
+  @include container(80em);
+  height: 100px;
+}
+article {
+  background-color: white;
+  @include show-grid(overlay);
+  @include susy-breakpoint(600px 1000px) {
+    @include span(3 of 6);
+  }
+
+  @include susy-breakpoint(300px 600px, 3) {
+    @include span(1);
+  }
+
+  @include susy-breakpoint(0 300px, 22) {
+    @include span(3);
+  }
+
+  outline: 1px solid orange;
+  height: 50px;
+  outline: 1px solid red;
+  @include span(1);
+
+  span {
+    @include container();
+    outline: 1px solid green;
+    height: 20px;
+    @include span(1 of 3);
+    @include show-grid(overlay);
+    display: table;
+
+    p {
+      display: table-cell;
+      vertical-align: middle;
+      background-color: orange;
+      font-size: 5px;
+      height: 50px;
+      outline: 1px solid black;
+      @include span(1 of 300);
+      &:first-child {
+        @include push(5);
+      }
+    }
+  }
+}

@@ -1,0 +1,220 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass";
+@import "compass/reset";
+
+* {
+  box-sizing: border-box;
+}
+
+@import "compass/css3";
+@import "susy";
+@import "breakpoint";
+
+$susy: (
+  columns: 6,
+  gutters: 0,
+  math: fluid,
+  gutter-position: inside,
+  container-position: center,
+  global-box-sizing: border-box,
+  debug: (
+    image: show-columns,
+    color: rgba(#66f, .25),
+    output: backrounds,
+    toggle: top right,
+  ),
+  debug image: show
+);
+
+//@import "prueba1";
+/* Prueba 2 */
+$height: 40px;
+$height-mobile: $height*2;
+
+$tabla: (
+  container-position: center,
+  columns: 12,
+  gutters: 0,
+  gutter-position: inside,
+  math: fluid,
+  global-box-sizing: border-box,
+);
+
+// Match:
+.match {
+  height: $height;
+  @include layout($tabla);
+  @include container(40em);
+  @include show-grid(overlay);
+  @include transition(all 1s);
+  @include susy-breakpoint(0px 500px) {
+    height: $height-mobile;
+  }
+  border: 1px solid black;
+  border-bottom: 2px solid black;
+  font-family: 'Roboto', sans-serif;
+
+  &:hover {
+    height: $height + 10px;
+  }
+
+  // Time:
+  &>p:first-child {
+    @include span(1 of 12);
+    height: 100%;
+    padding: 5px;
+    text-align: center;
+    font-weight: 300;
+    font-size: 13px;
+    color: grey;
+    background-color: #D8D9DD;
+
+    &>span {
+      @include span(12 of 12);
+      height: 50%;
+    }
+  }
+
+  // Teams & Competition:
+  &>div {
+    box-sizing: border-box;
+    @include container();
+    @include span(7 of 12);
+    height: 100%;
+    text-align: center;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    @include box-shadow(-4px 0px 8px #808080);
+
+    &>a {
+      @include span(12 of 12);
+      height: 50%;
+      text-align: center;
+      color: black;
+      @include transition(all 0.3s);
+
+      // Teams:
+      &:nth-child(1) {
+        background-color: white;
+
+        &:hover {
+          color: white;
+          background-color: green;
+        }
+      }
+
+      // Competition:
+      &:nth-child(2) {
+        padding-top: 2px;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 300;
+        background-color: #D8D9DD;
+        color: #648562;
+
+        &:hover {
+          color: white;
+          background-color: darken(#D8D9DD, 50%);
+        }
+      }
+
+      // Team 1:
+      span:first-child {
+        @include span(6 of 13);
+        height: 100%;
+        padding-left: 17px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: right;
+
+        @include susy-breakpoint(0px 500px) {
+          @include span(11 of 12);
+          height: 50%;
+        }
+      }
+
+      // Team 2:
+      span:nth-child(3) {
+        @include span(6 of 13);
+        height: 100%;
+        padding-right: 17px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: left;
+
+        @include susy-breakpoint(0px 500px) {
+          @include span(11 of 12);
+          height: 50%;
+          text-align: right;
+          padding-right: 0px;
+        }
+      }
+
+      // VS:
+      span:nth-child(2) {
+        @include span(1 of 13);
+        height: 90%;
+        font-weight: 300;
+
+        @include susy-breakpoint(0px 500px) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  // Cuotas:
+  &>ul {
+      $bets: (
+        container-position: center,
+        columns: 3,
+        gutters: 0,
+        gutter-position: inside,
+        math: fluid,
+        global-box-sizing: border-box,
+        debug: (
+          color: green,
+          output: overlay,
+        ),
+        debug image: show
+      );
+      @include span(4 of 12);
+      @include layout($bets);
+      @include show-grid(overlay);
+      height: 100%;
+
+      li {
+        @include span(1 of 3);
+        display: table;
+        height: 100%;
+        background-color: grey;
+        text-align: center;
+
+        &:first-child {
+            @include span(1 of 3 last);
+        }
+
+        a {
+          display: table-cell;
+          vertical-align: middle;
+          color: black;
+          text-decoration: none;
+          background-color: rgba(255,255,255,1);
+          @include background-image(linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 48%, rgba(227,227,227,1) 50%, rgba(227,227,227,1) 100%));
+
+          &.best {
+            color: white;
+            font-weight: 900;
+            background-color: #70A83B;
+            @include background-image(linear-gradient(top, rgba(112,152,59,1) 0%, rgba(112,152,59,1) 48%, rgba(101,140,46,1) 50%, rgba(101,140,46,1) 100%));
+          }
+        }
+      }
+    }
+}

@@ -46,7 +46,7 @@ $tabla: (
 
 // Match:
 .match {
-  height: $height;
+  height: auto;       // HACK HEIGHT 100%
   @include layout($tabla);
   @include container(40em);
   @include show-grid(overlay);
@@ -80,7 +80,8 @@ $tabla: (
   }
 
   // Teams & Competition:
-  &>div {
+  &>div:not(.bets-wrapper) {
+    //@include maintain-aspect-ratio(1,1);
     box-sizing: border-box;
     @include container();
     @include span(7 of 12);
@@ -92,7 +93,7 @@ $tabla: (
 
     &>a {
       @include span(12 of 12);
-      height: 50%;
+      height: 100%;
       text-align: center;
       color: black;
       @include transition(all 0.3s);
@@ -233,7 +234,7 @@ $tabla: (
       li {
         font-weight: 300;
         @include span(3 of 12);
-        
+
         &:first-child {
           @include span(6 of 12);
 
@@ -256,6 +257,36 @@ $tabla: (
           }
         }
       }
+    }
+  }
+}
+.otras {      // HACK HEIGHT 100%
+
+  .match {
+    display: table;
+  }
+
+  .teams-wrapper {
+    display: table-cell;
+    float: none!important;
+
+    a {
+      display: inline-table;
+      float: left;
+      height: 100%;
+    }
+  }
+}
+// END HACK HEIGHT 100%
+
+.bets-wrapper {
+  @include span(4 of 12);
+
+  ul {
+    @include span(1 of 1);
+
+    li {
+      @include span(1 of 3);
     }
   }
 }

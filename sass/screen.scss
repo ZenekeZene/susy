@@ -274,6 +274,8 @@ $tabla: (
       display: inline-table;
       float: left;
       height: 100%;
+      display: block; // Necessary for Chrome (funciona en Firefox tb? porque nos cargamos el display de arriba)
+      overflow: auto; // Necessary for Chrome
     }
   }
 }
